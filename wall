@@ -1,3 +1,0 @@
-#!/bin/bash
-//
-find ~/Documents/papes -type -f | shuf | sxiv -
