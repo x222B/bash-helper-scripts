@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 2;
+static int borderpx = 10;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -95,31 +95,37 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
+
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#383a42",	/*black*/
+  	"#e45649",	/*red3*/
+  	"#50a14f",	/*green3*/
+  	"#c18401",	/*yellow3*/
+  	"#0184bc",	/*blue2*/
+  	"#a626a4",	/*magenta3*/
+	"#0997b3",	/*cyan3*/
+  	"#fafafa",	/*gray90*/
+
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#383a42",	/*gray50*/
+	"#e45649",	/*red*/
+	"#50a14f",	/*green*/
+	"#c18401",	/*yellow*/
+	"#0184bc",	/*5c5cff*/
+	"#a626a4",	/*magenta*/
+	"#0997b3",	/*cyan*/
+	"#fafafa",	/*white*/
 
-	[255] = 0,
+
+    	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+
+    	"#fafafa", 	/* BG 256 */
+    	"#383a42",  	/* FG 257 */
+	"#c4d1fd",	/*cursor*/
+	"#f1f1f1"
 };
 
 
@@ -127,10 +133,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+unsigned int defaultbg = 256;
+unsigned int defaultfg = 257;
+static unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 259;
 
 /*
  * Default shape of cursor
