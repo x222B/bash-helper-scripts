@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 10;
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -96,47 +96,35 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
-	/* 8 normal colors */
-	"#383a42",	/*black*/
-  	"#e45649",	/*red3*/
-  	"#50a14f",	/*green3*/
-  	"#c18401",	/*yellow3*/
-  	"#0184bc",	/*blue2*/
-  	"#a626a4",	/*magenta3*/
-	"#0997b3",	/*cyan3*/
-  	"#fafafa",	/*gray90*/
+  /* 8 normal colors */
+  [0] = "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+  [1] = "#cc241d", /* red     */
+  [2] = "#98971a", /* green   */
+  [3] = "#d79921", /* yellow  */
+  [4] = "#458588", /* blue    */
+  [5] = "#b16286", /* magenta */
+  [6] = "#689d6a", /* cyan    */
+  [7] = "#a89984", /* white   */
 
-
-	/* 8 bright colors */
-	"#383a42",	/*gray50*/
-	"#e45649",	/*red*/
-	"#50a14f",	/*green*/
-	"#c18401",	/*yellow*/
-	"#0184bc",	/*5c5cff*/
-	"#a626a4",	/*magenta*/
-	"#0997b3",	/*cyan*/
-	"#fafafa",	/*white*/
-
-
-    	[255] = 0,
-
-	/* more colors can be added after 255 to use with DefaultXX */
-
-    	"#fafafa", 	/* BG 256 */
-    	"#383a42",  	/* FG 257 */
-	"#c4d1fd",	/*cursor*/
-	"#f1f1f1"
+  /* 8 bright colors */
+  [8]  = "#928374", /* black   */
+  [9]  = "#fb4934", /* red     */
+  [10] = "#b8bb26", /* green   */
+  [11] = "#fabd2f", /* yellow  */
+  [12] = "#83a598", /* blue    */
+  [13] = "#d3869b", /* magenta */
+  [14] = "#8ec07c", /* cyan    */
+  [15] = "#ebdbb2", /* white   */
 };
-
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
-unsigned int defaultbg = 256;
-unsigned int defaultfg = 257;
-static unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 259;
+unsigned int defaultfg = 15;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -189,7 +177,7 @@ static MouseShortcut mshortcuts[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
-#define TERMMOD (Mod1Mask|ShiftMask)
+#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -205,13 +193,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,             	XK_u,     	kscrollup,      {.i = -1} },
-	{ MODKEY,            	XK_d,   	kscrolldown,    {.i = -1} },
-	{ MODKEY,             	XK_k,     	kscrollup,      {.i =  1} },
-	{ MODKEY,            	XK_j,   	kscrolldown,    {.i =  1} },
-	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
-	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
-	{ TERMMOD,              XK_BackSpace,   zoomreset,      {.f =  0} },
 };
 
 /*
