@@ -2193,7 +2193,7 @@ tcontrolcode(uchar ascii)
 			/* backwards compatibility to xterm */
 			strhandle();
 		} else {
-			xbell();
+			/*xbell()*/;
 		}
 		break;
 	case '\033': /* ESC */

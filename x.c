@@ -1726,14 +1726,6 @@ xseturgency(int add)
 	XFree(h);
 }
 
-void
-xbell(void)
-{
-	if (!(IS_SET(MODE_FOCUSED)))
-		xseturgency(1);
-	if (bellvolume)
-		XkbBell(xw.dpy, xw.win, bellvolume, (Atom)NULL);
-}
 
 void
 focus(XEvent *ev)
