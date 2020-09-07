@@ -1566,6 +1566,17 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 					borderpx + cx * win.cw,
 					borderpx + (cy + 1) * win.ch - \
 >>>>>>>
+<<<<<<<
+=======
+		case 3: /* Blinking underline */
+			if (IS_SET(MODE_BLINK))
+				break;
+			/* FALLTHROUGH */
+		case 4: /* Steady underline */
+			XftDrawRect(xw.draw, &drawcol,
+					borderpx + cx * win.cw,
+					borderpx + (cy + 1) * win.ch - \
+>>>>>>>
 		case 3: /* Blinking underline */
 			if (IS_SET(MODE_BLINK))
 				break;
@@ -1587,6 +1598,20 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 					borderpx + cy * win.ch,
 					cursorthickness, win.ch);
 			break;
+<<<<<<<
+=======
+		case 7: /* Blinking st cursor */
+			if (IS_SET(MODE_BLINK))
+				break;
+			/* FALLTHROUGH */
+		case 8: /* Steady st cursor */
+			g.u = stcursor;
+			xdrawglyph(g, cx, cy);
+			break;
+		}
+	} else {
+		XftDrawRect(xw.draw, &drawcol,
+>>>>>>>
 <<<<<<<
 =======
 		case 7: /* Blinking st cursor */
@@ -1999,6 +2024,16 @@ run(void)
 		if (FD_ISSET(ttyfd, &rfd) || xev) {
 			if (!drawing) {
 				trigger = now;
+<<<<<<<
+=======
+				if (IS_SET(MODE_BLINK)) {
+					win.mode ^= MODE_BLINK;
+				}
+				lastblink = now;
+				drawing = 1;
+			}
+			timeout = (maxlatency - TIMEDIFF(now, trigger)) \
+>>>>>>>
 				if (IS_SET(MODE_BLINK)) {
 					win.mode ^= MODE_BLINK;
 				}
